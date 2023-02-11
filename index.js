@@ -41,6 +41,15 @@ let saveUser =
 }
 function submitForm()
 {
+    let gen = undefined;
+    for(let i=0;i<gender.length;i++)
+    {
+        if(gender[i].checked)
+        {
+            gen = gender[i].value;
+        }
+    }
+
     if(firstName.value === "")
     {
         return alert("Please Enter First Name")
@@ -65,10 +74,36 @@ function submitForm()
         return alert("Please Select Gender");
     }
 
-    if(dob === null)
+    if(dob.value === "")
     {
         return alert("Please Select Date Of Birth");
     }
+
+    if(!checkEmailId())
+    {
+        return alert("Please Enter valid email")
+    }
+
+    if(checkMobileNumber() === 1)
+    {
+        return alert("Please Enter Valid Primary Mobile Number")
+    }
+
+    if(checkMobileNumber() === 2)
+    {
+        return alert("Please Enter Valid Secondary Mobile Number")
+    }
+
+    if(checkAddress() == 1)
+    {
+       return alert("Please Enter Valid Current Address")
+    }
+
+    if(checkAddress() == 2)
+    {
+       return alert("Please Enter Valid Permanent Address");
+    }
+
 
     let currentAddress = 
     {
@@ -90,15 +125,7 @@ function submitForm()
         country : country1.value
     }
 
-    let gen = "";
-    password
-    for(let i=0;i<gender.length;i++)
-    {
-        if(gender[i].checked)
-        {
-            gen = gender[i].value;
-        }
-    }
+    
     let user = [];
 
     let userDetails = 
@@ -126,4 +153,77 @@ function submitForm()
 
     console.log(localStorage.getItem('user'))
 
+}
+
+function checkEmailId()
+{
+    let str = emailId.value;
+    str = str.trim();
+    let cnt=0;
+    
+    if(str.includes("."))
+    {
+        if(str.includes("@"))
+        {
+            if(!str.includes(" "))
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function checkMobileNumber()
+{
+    let prMobileNo = primaryMobileNo.value;
+    let secMobileNo = secondaryMobileNo.value;
+
+    if(prMobileNo.length != 10)
+    {
+        return 1;
+    }
+    if(secMobileNo.length != 10)
+    {
+        return 2;
+    }
+
+    return 0;
+}
+
+function checkAddress()
+{
+    //for current Address
+    let stAddress = streetAddress.value;
+    let sttAddressLine = streetAddressLine.value;
+    let currentCity = city.value;
+    let currentstate = state.value;
+    let currentpin = pin.value;
+    let currentcountry = country.value;
+
+
+    //for Permanent Address
+
+    let PstAddress = streetAddress1.value;
+    let PsttAddressLine = streetAddressLine1.value;
+    let PcurrentCity = city1.value;
+    let Pcurrentstate = state1.value;
+    let Pcurrentpin = pin1.value;
+    let Pcurrentcountry = country1.value;
+
+    if(stAddress == "" || sttAddressLine == "" || currentCity == "" || currentstate == "0" || currentpin == "" || currentcountry=="0")
+    {
+        return 1;
+    }
+
+    if(PstAddress == "" || PsttAddressLine == "" || PcurrentCity == "" || Pcurrentstate == "0" || Pcurrentpin == "" || Pcurrentcountry=="0")
+    {
+        return 2;
+    }
+    return 0;
+}
+
+function checkPassword()
+{
+    
 }
