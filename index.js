@@ -35,10 +35,7 @@ let username = document.getElementById('username');
 let password = document.getElementById('password');
 let confirmPassword = document.getElementById('confirmPassword');
 
-let saveUser = 
-{
-    "name" : 'Something'
-}
+
 function submitForm()
 {
     let gen = undefined;
@@ -104,6 +101,20 @@ function submitForm()
        return alert("Please Enter Valid Permanent Address");
     }
 
+    if(!checkUsername())
+    {
+        return alert("Please Enter Valid Username. Usernames doe not Contain Numerical Value")
+    }
+
+    if(!checkPassword())
+    {
+        return alert("Please Enter Valid Password. Password Must Contain atleast 8 characters and @");
+    }
+
+    if(!confirmPass())
+    {
+        return alert("Password and ConfirmPassword are not same. Please Enter same password");
+    }
 
     let currentAddress = 
     {
@@ -125,7 +136,6 @@ function submitForm()
         country : country1.value
     }
 
-    
     let user = [];
 
     let userDetails = 
@@ -147,12 +157,18 @@ function submitForm()
     }
     console.log(userDetails);
     let arr = JSON.parse(localStorage.getItem('user'));
-    arr.push(userDetails);
+    if(arr === null)
+    {
+        arr = [];
+        localStorage.setItem('user', JSON.stringify(arr));
+        arr = JSON.parse(localStorage.getItem('user'));
+    }
 
+    arr.push(userDetails);
+    console.log(arr);
     localStorage.setItem('user', JSON.stringify(arr));
 
-    console.log(localStorage.getItem('user'))
-
+    console.log(localStorage.getItem('user'));
 }
 
 function checkEmailId()
@@ -223,7 +239,81 @@ function checkAddress()
     return 0;
 }
 
+let ch = document.getElementById('exampleCheck1');
+
+ch.addEventListener('change', e => {
+
+    if(e.target.checked){
+        streetAddress1.value = streetAddress.value;
+        streetAddressLine1.value = streetAddressLine.value;
+        city1.value = city.value;
+        state1.value = state.value;
+        pin1.value = pin.value;
+        country1.value = country.value;
+    }
+    else
+    {
+        streetAddress1.value = "";
+        streetAddressLine1.value = "";
+        city1.value = "";
+        state1.value = "";
+        pin1.value = "";
+        country1.value = "";
+    }
+});
+
 function checkPassword()
 {
-    
+    let pas = password.value;
+    pas = pas.trim();
+    if(pas.length<8 || !pas.includes("@"))
+    {
+        return false;
+    }
+
+    let cnt=0;
+    for(let i=0; i<pas.length; i++)
+    {
+        if(pas.charAt(i)>='0' && pas.charAt(i)<='9')
+        {
+            cnt++;
+        }
+    }
+    if(cnt<3 || cnt>5)
+    {
+        return false;
+    }
+    return true;
 }
+
+function confirmPass()
+{
+    let pas = password.value;
+    let confirmPas = confirmPassword.value;
+
+    pas = pas.trim();
+    confirmPas = confirmPas.trim();
+
+    if(pas !== confirmPas)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+function checkUsername()
+{
+    let userName = username.value;
+    let cnt=0;
+
+    for(let i=0; i<userName.length; i++)
+    {
+        if(userName.charAt(i)>='0' && userName.charAt(i)<='9')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
