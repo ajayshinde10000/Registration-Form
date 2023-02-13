@@ -321,3 +321,12 @@ function checkUsername()
     return true;
 }
 
+document.addEventListener('keypress', 
+(e)=>
+{
+    if(e.ctrlKey === true && e.keyCode === 83)
+    {
+        e.preventDefault();
+        submitForm();
+    }
+})
