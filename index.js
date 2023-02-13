@@ -12,7 +12,6 @@ let emailId = document.getElementById('emailId');
 let primaryMobileNo = document.getElementById('primaryMobileNo');
 let secondaryMobileNo = document.getElementById('secondaryMobileNo');
 
-
 //current Address Field access
 let streetAddress = document.getElementById('streetAddress');
 let streetAddressLine = document.getElementById('streetAddressLine');
@@ -167,12 +166,10 @@ function submitForm()
     console.log(userDetails);
     let arr = JSON.parse(localStorage.getItem('user'));
    
-
     arr.push(userDetails);
     console.log(arr);
     localStorage.setItem('user', JSON.stringify(arr));
 
-    console.log(localStorage.getItem('user'));
     window.location.reload();
    
 }
@@ -223,7 +220,6 @@ function checkMobileNumber()
     {
         return 2;
     }
-
     return 0;
 }
 
@@ -236,7 +232,6 @@ function checkAddress()
     let currentstate = state.value;
     let currentpin = pin.value;
     let currentcountry = country.value;
-
 
     //for Permanent Address
 
@@ -262,7 +257,6 @@ function checkAddress()
 let ch = document.getElementById('exampleCheck1');
 
 ch.addEventListener('change', e => {
-
     if(e.target.checked){
         streetAddress1.value = streetAddress.value;
         streetAddressLine1.value = streetAddressLine.value;
@@ -276,9 +270,9 @@ ch.addEventListener('change', e => {
         streetAddress1.value = "";
         streetAddressLine1.value = "";
         city1.value = "";
-        state1.value = "";
+        state1.value = "0";
         pin1.value = "";
-        country1.value = "";
+        country1.value = "0";
     }
 });
 
@@ -310,15 +304,12 @@ function confirmPass()
 {
     let pas = password.value;
     let confirmPas = confirmPassword.value;
-
     pas = pas.trim();
     confirmPas = confirmPas.trim();
-
     if(pas !== confirmPas)
     {
         return false;
     }
-
     return true;
 }
 
@@ -326,7 +317,6 @@ function checkUsername()
 {
     let userName = username.value;
     let cnt=0;
-
     for(let i=0; i<userName.length; i++)
     {
         if(userName.charAt(i)>='0' && userName.charAt(i)<='9')
