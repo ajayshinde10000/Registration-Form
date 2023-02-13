@@ -328,12 +328,9 @@ function checkUsername()
     return true;
 }
 
-document.addEventListener('keypress', 
-(e)=>
-{
-    if(e.ctrlKey === true && e.keyCode === 83)
-    {
-        e.preventDefault();
-        submitForm();
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 's') {
+      e.preventDefault();
+      submitForm();
     }
-})
+  });
