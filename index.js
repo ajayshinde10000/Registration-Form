@@ -83,12 +83,12 @@ function submitForm()
 
     if(checkMobileNumber() === 1)
     {
-        return alert("Please Enter Valid Primary Mobile Number")
+        return alert("Please Enter Valid Primary Mobile Number. Mobile number must be of 10 digits")
     }
 
     if(checkMobileNumber() === 2)
     {
-        return alert("Please Enter Valid Secondary Mobile Number")
+        return alert("Please Enter Valid Secondary Mobile Number. Mobile number must be of 10 digits")
     }
 
     if(checkAddress() == 1)
