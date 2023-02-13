@@ -157,12 +157,7 @@ function submitForm()
     }
     console.log(userDetails);
     let arr = JSON.parse(localStorage.getItem('user'));
-    if(arr === null)
-    {
-        arr = [];
-        localStorage.setItem('user', JSON.stringify(arr));
-        arr = JSON.parse(localStorage.getItem('user'));
-    }
+   
 
     arr.push(userDetails);
     console.log(arr);
@@ -172,8 +167,20 @@ function submitForm()
     window.location.reload();
    
 }
-let arr = JSON.parse(localStorage.getItem('user'))
-console.log(arr[arr.length - 1]);
+
+function InitialLoad()
+{
+    let arr = JSON.parse(localStorage.getItem('user'))
+    if(arr === null)
+    {
+        arr = [];
+        localStorage.setItem('user', JSON.stringify(arr));
+        arr = JSON.parse(localStorage.getItem('user'));
+    }
+    console.log(arr[arr.length - 1]);
+}
+
+InitialLoad();
 
 function checkEmailId()
 {
