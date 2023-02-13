@@ -47,18 +47,27 @@ function submitForm()
         }
     }
 
-    if(firstName.value === "")
+    fName = firstName.value;
+    fName = fName.trim();
+
+    if(fName === "")
     {
         return alert("Please Enter First Name")
     }
-    if(lastName.value === "")
-    {
-        return alert("Please Enter last Name")
-    }
 
-    if(middleName.value === "")
+    mName = middleName.value;
+    mName = mName.trim();
+
+    if(mName === "")
     {
         return alert("Please Enter Middle Name")
+    }
+
+    lName = lastName.value;
+    lName = lName.trim();
+    if(lName === "")
+    {
+        return alert("Please Enter last Name")
     }
 
     if(age.value === "" || age.value === 'e' || age.value === 'E')
