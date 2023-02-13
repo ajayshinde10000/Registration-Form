@@ -169,7 +169,11 @@ function submitForm()
     localStorage.setItem('user', JSON.stringify(arr));
 
     console.log(localStorage.getItem('user'));
+    window.location.reload();
+   
 }
+let arr = JSON.parse(localStorage.getItem('user'))
+console.log(arr[arr.length - 1]);
 
 function checkEmailId()
 {
