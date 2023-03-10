@@ -1,148 +1,175 @@
-var firstName = document.getElementById('firstName');
-var middleName = document.getElementById('middleName');
-var lastName = document.getElementById('lastName');
-var age = document.getElementById('age');
-var gender = document.getElementsByName('gender');
-var dob = document.getElementById('dob');
-var emailId = document.getElementById('emailId');
-var primaryMobileNo = document.getElementById('primaryMobileNo');
-var secondaryMobileNo = document.getElementById('secondaryMobileNo');
-//current Address Field access
-var streetAddress = document.getElementById('streetAddress');
-var streetAddressLine = document.getElementById('streetAddressLine');
-var city = document.getElementById('city');
-var state = document.getElementById('state');
-var pin = document.getElementById('pin');
-var country = document.getElementById('country');
-//permanent Address
-var streetAddress1 = document.getElementById('streetAddress1');
-var streetAddressLine1 = document.getElementById('streetAddressLine1');
-var city1 = document.getElementById('city1');
-var state1 = document.getElementById('state1');
-var pin1 = document.getElementById('pin1');
-var country1 = document.getElementById('country1');
-var username = document.getElementById('username');
-var password = document.getElementById('password');
-var confirmPassword = document.getElementById('confirmPassword');
+var _this = this;
+var userDetails = /** @class */ (function () {
+    // constructor
+    function userDetails(firstName, middleName, lastName, age, gender, dob, emailId, primaryMobileNo, secondaryMobileNo, currentAddress, permanentAddress, username, password, confirmPassword) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.dob = dob;
+        this.emailId = emailId;
+        this.primaryMobileNo = primaryMobileNo;
+        this.secondaryMobileNo = secondaryMobileNo;
+        this.currentAddress = currentAddress;
+        this.permanentAddress = permanentAddress;
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
+    return userDetails;
+}());
 function submitForm() {
-    var gen = undefined;
-    for (var i = 0; i < gender.length; i++) {
-        if (gender[i].checked) {
-            gen = gender[i].value;
-        }
+    var gen;
+    var firstName = document.getElementById("firstName");
+    var middleName = document.getElementById("middleName");
+    var lastName = document.getElementById("lastName");
+    var age = document.getElementById("age");
+    var gender = document.getElementById("inlineRadio1");
+    var dob = document.getElementById("dob");
+    var emailId = document.getElementById("emailId");
+    var primaryMobileNo = (document.getElementById("primaryMobileNo"));
+    var secondaryMobileNo = (document.getElementById("secondaryMobileNo"));
+    // Current Address Fields
+    var streetAddress = (document.getElementById("streetAddress"));
+    var streetAddressLine = (document.getElementById("streetAddressLine"));
+    var city = document.getElementById("city");
+    var state = document.getElementById("state");
+    var pin = document.getElementById("pin");
+    var country = document.getElementById("country");
+    // Permanent Adress Here
+    var streetAddress1 = (document.getElementById("streetAddress1"));
+    var streetAddressLine1 = (document.getElementById("streetAddressLine1"));
+    var city1 = document.getElementById("city1");
+    var state1 = document.getElementById("state1");
+    var pin1 = document.getElementById("pin1");
+    var country1 = document.getElementById("country1");
+    var username = document.getElementById("username");
+    var password = document.getElementById("password");
+    var confirmPassword = (document.getElementById("confirmPassword"));
+    var male = document.getElementById("inlineRadio1");
+    var female = document.getElementById("inlineRadio2");
+    var other = document.getElementById("inlineRadio3");
+    if (male === null || male === void 0 ? void 0 : male.checked) {
+        gen = male.value;
     }
-    fName = firstName.value;
-    fName = fName.trim();
-    if (fName === "") {
-        return alert("Please Enter First Name");
+    else if (female === null || female === void 0 ? void 0 : female.checked) {
+        gen = female.value;
     }
-    mName = middleName.value;
-    mName = mName.trim();
-    if (mName === "") {
-        return alert("Please Enter Middle Name");
+    else if (other === null || other === void 0 ? void 0 : other.checked) {
+        gen = other.value;
     }
-    lName = lastName.value;
-    lName = lName.trim();
-    if (lName === "") {
-        return alert("Please Enter last Name");
+    else {
+        gen = "";
     }
-    if (age.value === "" || age.value === 'e' || age.value === 'E' || age.value <= 0 || age.value > 100) {
-        return alert("Please Enter valid age");
+    if (firstName.value === "") {
+        alert("Please Enter First Name");
+        return false;
     }
-    if (gen === undefined) {
-        return alert("Please Select Gender");
+    if (middleName.value === "") {
+        alert("Please Enter Middle Name");
+        return false;
+    }
+    if (lastName.value === "") {
+        alert("Please Enter Last Name");
+        return false;
+    }
+    if (age.value === "" ||
+        parseInt(age.value) === 0 ||
+        age.value === "E" ||
+        parseInt(age.value) <= 0 ||
+        parseInt(age.value) > 100) {
+        alert("Please Enter valid age");
+        return false;
+    }
+    if (gen === "") {
+        alert("Please Select Gender");
+        return false;
     }
     if (dob.value === "") {
-        return alert("Please Select Date Of Birth");
+        alert("Please Select Date Of Birth");
+        return false;
     }
     if (!checkEmailId()) {
-        return alert("Please Enter valid email");
+        alert("Please Enter valid email");
+        return false;
     }
     if (checkMobileNumber() === 1) {
-        return alert("Please Enter Valid Primary Mobile Number. Mobile number must be of 10 digits");
+        alert("Please Enter Valid Primary Mobile Number. Mobile number must be of 10 digits");
+        return false;
     }
     if (checkMobileNumber() === 2) {
-        return alert("Please Enter Valid Secondary Mobile Number. Mobile number must be of 10 digits");
+        alert("Please Enter Valid Secondary Mobile Number. Mobile number must be of 10 digits");
+        return false;
     }
     if (checkAddress() == 1) {
-        return alert("Please Enter Valid Current Address");
+        alert("Please Enter Valid Current Address");
+        return false;
     }
     if (checkAddress() == 2) {
-        return alert("Please Enter Valid Permanent Address");
+        alert("Please Enter Valid Permanent Address");
+        return false;
     }
     if (!checkUsername()) {
-        return alert("Please Enter Valid Username. Usernames doe not Contain Numerical Value");
+        alert("Please Enter Valid Username. Usernames doe not Contain Numerical Value");
+        return false;
     }
     if (!checkPassword()) {
-        return alert("Please Enter Valid Password. Password Must Contain atleast 8 characters and @");
+        alert("Please Enter Valid Password. Password Must Contain atleast 8 characters and @");
+        return false;
     }
     if (!confirmPass()) {
-        return alert("Password and ConfirmPassword are not same. Please Enter same password");
+        alert("Password and ConfirmPassword are not same. Please Enter same password");
+        return false;
     }
-    var currentAddress = {
-        streetAddress: streetAddress.value,
-        streetAddressLine: streetAddressLine.value,
-        city: city.value,
-        state: state.value,
-        pin: pin.value,
-        country: country.value
-    };
-    var permanentAddress = {
-        streetAddress: streetAddress1.value,
-        streetAddressLine: streetAddressLine1.value,
-        city: city1.value,
-        state: state1.value,
-        pin: pin1.value,
-        country: country1.value
-    };
-    var user = [];
-    var userDetails = {
+    var obj = {
         firstName: firstName.value,
         middleName: middleName.value,
         lastName: lastName.value,
-        age: age.value,
+        age: parseInt(age.value),
         gender: gen,
         dob: dob.value,
         emailId: emailId.value,
         primaryMobileNo: primaryMobileNo.value,
         secondaryMobileNo: secondaryMobileNo.value,
-        currentAddress: currentAddress,
-        permanentAddress: permanentAddress,
+        currentAddress: {
+            streetAddress: streetAddress.value,
+            streetAddressLine: streetAddressLine.value,
+            city: city.value,
+            state: state.value,
+            pin: parseInt(pin.value),
+            country: country.value
+        },
+        permanentAddress: {
+            streetAddress1: streetAddress1.value,
+            streetAddressLine1: streetAddressLine1.value,
+            city1: city1.value,
+            state1: state1.value,
+            pin1: parseInt(pin1.value),
+            country1: country1.value
+        },
         username: username.value,
         password: password.value,
         confirmPassword: confirmPassword.value
     };
-    // main.js
     // POST request using fetch()
     fetch("https://winter-summer-sceptre.glitch.me/submit", {
         method: "POST",
-        body: JSON.stringify(userDetails),
+        body: JSON.stringify(obj),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
     })
         // Converting to JSON
-        .then(function (response) { return response.json(userDetails); })
+        .then(function (response) { return response.json(); })
         // Displaying results to console
         .then(function (json) { return console.log(json); });
-    console.log(userDetails);
-    var arr = JSON.parse(localStorage.getItem('user'));
-    arr.push(userDetails);
-    console.log(arr);
-    localStorage.setItem('user', JSON.stringify(arr));
+    console.log(obj);
+    alert("Form Submitted Sucessfully");
+    return true;
 }
-function InitialLoad() {
-    var arr = JSON.parse(localStorage.getItem('user'));
-    if (arr === null) {
-        arr = [];
-        localStorage.setItem('user', JSON.stringify(arr));
-        arr = JSON.parse(localStorage.getItem('user'));
-    }
-    console.log(arr[arr.length - 1]);
-}
-InitialLoad();
 function checkEmailId() {
-    var str = emailId.value;
+    var str = this.emailId.value;
     str = str.trim();
     var cnt = 0;
     if (str.includes(".")) {
@@ -155,8 +182,8 @@ function checkEmailId() {
     return false;
 }
 function checkMobileNumber() {
-    var prMobileNo = primaryMobileNo.value;
-    var secMobileNo = secondaryMobileNo.value;
+    var prMobileNo = this.primaryMobileNo.value;
+    var secMobileNo = this.secondaryMobileNo.value;
     if (prMobileNo.length != 10) {
         return 1;
     }
@@ -167,55 +194,65 @@ function checkMobileNumber() {
 }
 function checkAddress() {
     //for current Address
-    var stAddress = streetAddress.value;
-    var sttAddressLine = streetAddressLine.value;
-    var currentCity = city.value;
-    var currentstate = state.value;
-    var currentpin = pin.value;
-    var currentcountry = country.value;
+    var stAddress = this.streetAddress.value;
+    var sttAddressLine = this.streetAddressLine.value;
+    var currentCity = this.city.value;
+    var currentstate = this.state.value;
+    var currentpin = this.pin.value;
+    var currentcountry = this.country.value;
     //for Permanent Address
-    var PstAddress = streetAddress1.value;
-    var PsttAddressLine = streetAddressLine1.value;
-    var PcurrentCity = city1.value;
-    var Pcurrentstate = state1.value;
-    var Pcurrentpin = pin1.value;
-    var Pcurrentcountry = country1.value;
-    if (stAddress == "" || sttAddressLine == "" || currentCity == "" || currentstate == "0" || currentpin == "" || currentcountry == "0") {
+    var PstAddress = this.streetAddress1.value;
+    var PsttAddressLine = this.streetAddressLine1.value;
+    var PcurrentCity = this.city1.value;
+    var Pcurrentstate = this.state1.value;
+    var Pcurrentpin = this.pin1.value;
+    var Pcurrentcountry = this.country1.value;
+    if (stAddress == "" ||
+        sttAddressLine == "" ||
+        currentCity == "" ||
+        currentstate == "0" ||
+        currentpin == "" ||
+        currentcountry == "0") {
         return 1;
     }
-    if (PstAddress == "" || PsttAddressLine == "" || PcurrentCity == "" || Pcurrentstate == "0" || Pcurrentpin == "" || Pcurrentcountry == "0") {
+    if (PstAddress == "" ||
+        PsttAddressLine == "" ||
+        PcurrentCity == "" ||
+        Pcurrentstate == "0" ||
+        Pcurrentpin == "" ||
+        Pcurrentcountry == "0") {
         return 2;
     }
     return 0;
 }
-var ch = document.getElementById('exampleCheck1');
-ch.addEventListener('change', function (e) {
+var ch = document.getElementById("exampleCheck1");
+ch.addEventListener("change", function (e) {
     if (e.target.checked) {
-        streetAddress1.value = streetAddress.value;
-        streetAddressLine1.value = streetAddressLine.value;
-        city1.value = city.value;
-        state1.value = state.value;
-        pin1.value = pin.value;
-        country1.value = country.value;
+        _this.streetAddress1.value = _this.streetAddress.value;
+        _this.streetAddressLine1.value = _this.streetAddressLine.value;
+        _this.city1.value = _this.city.value;
+        _this.state1.value = _this.state.value;
+        _this.pin1.value = _this.pin.value;
+        _this.country1.value = _this.country.value;
     }
     else {
-        streetAddress1.value = "";
-        streetAddressLine1.value = "";
-        city1.value = "";
-        state1.value = "0";
-        pin1.value = "";
-        country1.value = "0";
+        _this.streetAddress1.value = "";
+        _this.streetAddressLine1.value = "";
+        _this.city1.value = "";
+        _this.state1.value = "0";
+        _this.pin1.value = "";
+        _this.country1.value = "0";
     }
 });
 function checkPassword() {
-    var pas = password.value;
+    var pas = this.password.value;
     pas = pas.trim();
     if (pas.length < 8 || !pas.includes("@")) {
         return false;
     }
     var cnt = 0;
     for (var i = 0; i < pas.length; i++) {
-        if (pas.charAt(i) >= '0' && pas.charAt(i) <= '9') {
+        if (pas.charAt(i) >= "0" && pas.charAt(i) <= "9") {
             cnt++;
         }
     }
@@ -225,8 +262,8 @@ function checkPassword() {
     return true;
 }
 function confirmPass() {
-    var pas = password.value;
-    var confirmPas = confirmPassword.value;
+    var pas = this.password.value;
+    var confirmPas = this.confirmPassword.value;
     pas = pas.trim();
     confirmPas = confirmPas.trim();
     if (pas !== confirmPas) {
@@ -235,17 +272,22 @@ function confirmPass() {
     return true;
 }
 function checkUsername() {
+    var username = document.getElementById("username");
     var userName = username.value;
+    if (userName === "") {
+        return false;
+    }
+    console.log(userName);
     var cnt = 0;
     for (var i = 0; i < userName.length; i++) {
-        if (userName.charAt(i) >= '0' && userName.charAt(i) <= '9') {
+        if (userName.charAt(i) >= "0" && userName.charAt(i) <= "9") {
             return false;
         }
     }
     return true;
 }
-document.addEventListener('keydown', function (e) {
-    if (e.ctrlKey && e.key === 's') {
+document.addEventListener("keydown", function (e) {
+    if (e.key === "s" && e.ctrlKey === true) {
         e.preventDefault();
         submitForm();
     }
