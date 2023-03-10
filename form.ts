@@ -1,11 +1,14 @@
 let firstName = document.getElementById('firstName');
 let middleName = document.getElementById('middleName');
 let lastName = document.getElementById('lastName');
-
 let age = document.getElementById('age');
+
 let gender= document.getElementsByName('gender');
+
 let dob= document.getElementById('dob');
+
 let emailId = document.getElementById('emailId');
+
 let primaryMobileNo = document.getElementById('primaryMobileNo');
 let secondaryMobileNo = document.getElementById('secondaryMobileNo');
 
@@ -30,7 +33,6 @@ let country1 = document.getElementById('country1');
 let username = document.getElementById('username');
 let password = document.getElementById('password');
 let confirmPassword = document.getElementById('confirmPassword');
-
 
 function submitForm()
 {
@@ -66,7 +68,7 @@ function submitForm()
         return alert("Please Enter last Name")
     }
 
-    if(age.value === "" || age.value === 'e' || age.value === 'E')
+    if(age.value === "" || age.value === 'e' || age.value === 'E' || age.value<=0 || age.value> 100)
     {
         return alert("Please Enter valid age");
     }
@@ -175,7 +177,7 @@ headers: {
 }
 })
 // Converting to JSON
-.then(response => response.json(userDetils))
+.then(response => response.json(userDetails))
 // Displaying results to console
 .then(json => console.log(json));
 
