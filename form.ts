@@ -26,7 +26,6 @@ interface Users {
     pin1: number;
     country1: string;
   };
-
   username: string;
   password: string;
   confirmPassword: string;
